@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rocket/models/app_model.dart';
+import 'package:rocket/stores/app.dart';
+import 'package:rocket/stores/data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import './views/main_view.dart';
 
-void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => AppModel(),
+Future<void> main() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => AppStore(),
+      ),
+      ChangeNotifierProvider(create: (context) => DataStore(prefs))
+    ],
     child: const App(),
   ));
 }

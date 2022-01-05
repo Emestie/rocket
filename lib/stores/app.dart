@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rocket/enums.dart';
 
-class AppModel extends ChangeNotifier {
+class AppStore extends ChangeNotifier {
   AppMode _mode = AppMode.view;
   get mode => _mode;
 
