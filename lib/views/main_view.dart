@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rocket/models/app_model.dart';
 
 import 'solution_manage_view.dart';
 import 'settings_view.dart';
@@ -12,20 +14,21 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  void goToView(String name) {
-    void pushView(view) {
-      Navigator.of(context).push(view);
-    }
+  Function() goToView(String name) {
+    return () {
+      void pushView(view) {
+        Navigator.of(context).push(view);
+      }
 
-    switch (name) {
-      case 'settings':
-        pushView(getSettingsViewRoute());
-        break;
-      case 'add':
-        pushView(getAddViewRoute());
-        break;
-      default:
-    }
+      switch (name) {
+        case 'settings':
+          pushView(getSettingsViewRoute());
+          break;
+        case 'add':
+          pushView(getAddViewRoute());
+          break;
+      }
+    };
   }
 
   @override
@@ -34,15 +37,22 @@ class _MainViewState extends State<MainView> {
         appBar: AppBar(
           title: Text(widget.appTitle),
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
+            Consumer<AppModel>(
+              builder: (_, app, __) => IconButton(
+                  onPressed: app.toggleAppMode, icon: const Icon(Icons.edit)),
+            ),
             IconButton(
-                onPressed: () => goToView("settings"),
+                onPressed: goToView("settings"),
                 icon: const Icon(Icons.settings))
           ],
         ),
         body: Center(
           child: Column(
-            children: const [Text("Text11")],
+            children: [
+              Consumer<AppModel>(
+                builder: (_, app, __) => Text("app mode: ${app.mode}"),
+              )
+            ],
             mainAxisAlignment: MainAxisAlignment.center,
           ),
         ));

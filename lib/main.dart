@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rocket/models/app_model.dart';
 
 import './views/main_view.dart';
 
 void main() {
-  runApp(const App());
+  runApp(ChangeNotifierProvider(
+    create: (context) => AppModel(),
+    child: const App(),
+  ));
 }
 
 class App extends StatelessWidget {
