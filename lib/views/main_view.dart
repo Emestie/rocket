@@ -1,11 +1,9 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rocket/components/group/group_container.dart';
 import 'package:rocket/enums.dart';
-import 'package:rocket/stores/app.dart';
-import 'package:rocket/stores/data.dart';
+import 'package:rocket/stores/app_store.dart';
+import 'dart:io';
 
 import 'solution_manage_view.dart';
 import 'settings_view.dart';
@@ -42,6 +40,7 @@ class _MainViewState extends State<MainView> {
         appBar: AppBar(
           title: Text(widget.appTitle),
           actions: [
+            TextButton(onPressed: () {}, child: const Text("Install update")),
             Consumer<AppStore>(
               builder: (_, app, __) => IconButton(
                   onPressed: app.toggleAppMode,
@@ -51,7 +50,12 @@ class _MainViewState extends State<MainView> {
             ),
             IconButton(
                 onPressed: goToView("settings"),
-                icon: const Icon(Icons.settings))
+                icon: const Icon(Icons.settings)),
+            IconButton(
+                onPressed: () {
+                  Process.run("code", ["~/Code"]);
+                },
+                icon: const Icon(Icons.run_circle))
           ],
         ),
         body: const GroupContainer());

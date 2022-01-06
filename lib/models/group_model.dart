@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:rocket/main.dart';
 
 class Group {
   int id;
   String name;
   late Color color;
   late bool isPinned;
+
+  bool get canRemove =>
+      (dataStore?.getSolutionsByGroupId(id).length ?? 0) > 0 ? false : true;
 
   Group(this.id, this.name) {
     color = Colors.grey;
