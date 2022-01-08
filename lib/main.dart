@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rocket/stores/app_store.dart';
-import 'package:rocket/stores/data_store.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rocket/stores/exposed.dart';
 
 import './views/main_view.dart';
 
-DataStore? dataStore;
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await initStoresAndPreferences();
 
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
-        create: (context) => AppStore(),
+        create: (context) => appStore,
       ),
-      ChangeNotifierProvider(create: (context) {
-        dataStore = DataStore(prefs);
-        return dataStore;
-      })
+      ChangeNotifierProvider(create: (context) => dataStore)
     ],
     child: const App(),
   ));

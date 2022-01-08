@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:rocket/models/group_model.dart';
 import 'package:rocket/models/solution_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rocket/stores/exposed.dart';
 
 class DataStore extends ChangeNotifier {
   final List<Group> _groups = [];
@@ -29,7 +29,7 @@ class DataStore extends ChangeNotifier {
   }
 
   void addGroup(String name) {
-    final group = Group(generateId(_groups), name);
+    final group = Group(generateId(), name);
     _groups.add(group);
 
     notifyListeners();
@@ -57,7 +57,15 @@ class DataStore extends ChangeNotifier {
     notifyListeners();
   }
 
-  int generateId(List list) {
+  void addSolution(int groupId, String name) {
+    final sol =
+        Solution(generateId(), groupId, name, 'path', 'SL', Colors.red, 1);
+    _solutions.add(sol);
+
+    notifyListeners();
+  }
+
+  int generateId() {
     lastId += 1;
 
     return lastId;
@@ -66,17 +74,16 @@ class DataStore extends ChangeNotifier {
   @override
   Future<void> notifyListeners() async {
     super.notifyListeners();
-    SharedPreferences prefs = await SharedPreferences.getInstance();
 
     final jsonString = jsonEncode(
         {'groups': _groups, 'solutions': _solutions, "lastId": lastId});
     print(jsonString);
 
-    prefs.setString('Data', jsonString);
+    sharedPreferences?.setString('Data', jsonString);
   }
 
-  DataStore(SharedPreferences prefs) {
-    final json = prefs.getString('Data') ?? "{}";
+  DataStore() {
+    final json = sharedPreferences?.getString('Data') ?? "{}";
     final decodedJsonObject = jsonDecode(json);
 
     final jsonGroups = (decodedJsonObject['groups'] ?? []);

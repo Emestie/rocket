@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rocket/main.dart';
+import 'package:rocket/stores/exposed.dart';
 
 class Group {
   int id;

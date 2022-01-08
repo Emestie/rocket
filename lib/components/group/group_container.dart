@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rocket/components/dialogs/text_dialog.dart';
 import 'package:rocket/components/group/group_item.dart';
+import 'package:rocket/models/group_model.dart';
 import 'package:rocket/stores/data_store.dart';
 
 class GroupContainer extends StatelessWidget {
