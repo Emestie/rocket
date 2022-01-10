@@ -25,7 +25,19 @@ class DataStore extends ChangeNotifier {
   }
 
   List<Solution> getSolutionsByGroupId(int id) {
-    return _solutions.where((element) => element.groupId == id).toList();
+    final allSolutions =
+        _solutions.where((element) => element.groupId == id).toList();
+    allSolutions
+        .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+
+    final pinnedSols =
+        allSolutions.where((element) => element.isPinned).toList();
+    final unpinnedSols =
+        allSolutions.where((element) => !element.isPinned).toList();
+
+    final sortedSols = [...pinnedSols, ...unpinnedSols];
+
+    return sortedSols;
   }
 
   void addGroup(String name) {
@@ -58,9 +70,22 @@ class DataStore extends ChangeNotifier {
   }
 
   void addSolution(int groupId, String name) {
-    final sol =
-        Solution(generateId(), groupId, name, 'path', 'SL', Colors.red, 1);
+    final sol = Solution(generateId(), groupId, 1, name, 'path');
     _solutions.add(sol);
+
+    notifyListeners();
+  }
+
+  void removeSolution(Solution solution) {
+    _solutions.remove(solution);
+
+    notifyListeners();
+  }
+
+  void togglePinSolution(Solution solution) {
+    _solutions.remove(solution);
+    solution.isPinned = !solution.isPinned;
+    _solutions.add(solution);
 
     notifyListeners();
   }

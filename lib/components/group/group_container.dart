@@ -21,7 +21,8 @@ class GroupContainer extends StatelessWidget {
               return GroupItem(groups[i]);
             }
 
-            return IconButton(
+            return TextButton.icon(
+              label: const Text("Add Group"),
               onPressed: () {
                 final defaultValue = "Group " + (data.lastId + 1).toString();
                 //data.addGroup("test");
@@ -33,7 +34,7 @@ class GroupContainer extends StatelessWidget {
                   data.addGroup(text == "" ? defaultValue : text);
                 });
               },
-              icon: const Icon(Icons.add_alarm),
+              icon: const Icon(Icons.add_circle_outline_sharp),
             );
           });
     });

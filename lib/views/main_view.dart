@@ -5,7 +5,6 @@ import 'package:rocket/enums.dart';
 import 'package:rocket/stores/app_store.dart';
 import 'dart:io';
 
-import 'solution_manage_view.dart';
 import 'settings_view.dart';
 
 class MainView extends StatefulWidget {
@@ -26,9 +25,6 @@ class _MainViewState extends State<MainView> {
       switch (name) {
         case 'settings':
           pushView(getSettingsViewRoute());
-          break;
-        case 'add':
-          pushView(getAddViewRoute());
           break;
       }
     };

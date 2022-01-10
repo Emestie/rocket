@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:rocket/models/solution_type_model.dart';
 
 class Solution {
@@ -7,23 +6,18 @@ class Solution {
   int typeId;
   String name;
   String path;
-  String acronym;
-  Color color;
   late bool isPinned;
 
-  SolutionType get type => getSolutionTypeById(id);
+  SolutionType get type => getSolutionTypeById(typeId);
 
-  Solution(this.id, this.groupId, this.name, this.path, this.acronym,
-      this.color, this.typeId) {
+  Solution(this.id, this.groupId, this.typeId, this.name, this.path) {
     isPinned = false;
   }
 
   Solution.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         name = json['name'],
-        color = Colors.red,
         isPinned = json['isPinned'],
-        acronym = json['acronym'],
         path = json['path'],
         groupId = json['groupId'],
         typeId = json['typeId'];
@@ -34,8 +28,6 @@ class Solution {
         'typeId': typeId,
         'name': name,
         'path': path,
-        'acronym': acronym,
-        'color': color.value.toString(),
         'isPinned': isPinned
       };
 }

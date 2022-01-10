@@ -17,11 +17,15 @@ class GroupItem extends StatelessWidget {
       BuildContext context, AppStore app, DataStore data) {
     final List<Widget> widgets = [];
 
-    widgets.add(Text("ID:" +
-        _group.id.toString() +
-        " " +
-        _group.name +
-        (_group.isPinned ? " P" : " _")));
+    if (_group.isPinned) {
+      widgets.add(const Icon(
+        Icons.star_rate_rounded,
+        size: 18,
+        color: Colors.black87,
+      ));
+    }
+
+    widgets.add(Text(_group.name));
 
     if (app.mode == AppMode.view) return widgets;
 
@@ -30,7 +34,15 @@ class GroupItem extends StatelessWidget {
           onPressed: () {
             data.togglePinGroup(_group);
           },
-          child: _group.isPinned ? const Text("Unpin") : const Text("Pin")),
+          child: _group.isPinned
+              ? const Text(
+                  "Unpin",
+                  style: TextStyle(fontSize: 13),
+                )
+              : const Text(
+                  "Pin",
+                  style: TextStyle(fontSize: 13),
+                )),
       TextButton(
           onPressed: () {
             showTextDialog(context,
@@ -40,7 +52,10 @@ class GroupItem extends StatelessWidget {
               data.editGroup(_group, text == "" ? _group.name : text);
             });
           },
-          child: const Text("Rename")),
+          child: const Text(
+            "Rename",
+            style: TextStyle(fontSize: 13),
+          )),
       TextButton(
           onPressed: () {
             void removeGroup() {
@@ -57,7 +72,10 @@ class GroupItem extends StatelessWidget {
               removeGroup();
             }
           },
-          child: const Text("Remove")),
+          child: const Text(
+            "Remove",
+            style: TextStyle(fontSize: 13),
+          )),
     ]);
 
     return widgets;
@@ -65,15 +83,21 @@ class GroupItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Consumer<AppStore>(
-        builder: (_, app, __) => Consumer<DataStore>(
-          builder: (_, data, __) => Row(
-            children: _generateGroupFacade(context, app, data),
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        child: Consumer<AppStore>(
+          builder: (_, app, __) => Consumer<DataStore>(
+            builder: (_, data, __) => Row(
+              children: _generateGroupFacade(context, app, data),
+            ),
           ),
         ),
       ),
-      SolutionContainer(_group.id)
+      SolutionContainer(_group.id),
+      const Divider(
+        thickness: 2,
+      ),
     ]);
   }
 }

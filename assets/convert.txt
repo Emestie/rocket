@@ -1,0 +1,1 @@
+magick convert -density 1200 -resize 32x32 -background none vs-code.svg vs-code.png     
