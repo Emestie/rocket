@@ -13,7 +13,7 @@ class SolutionItem extends StatelessWidget {
   final Solution _solution;
 
   List<Widget> _getStackContent(BuildContext context, AppMode appMode) {
-    List<Widget> content = [AcronymAvatar(_solution.id.toString())];
+    List<Widget> content = [AcronymAvatar(_solution.name)];
 
     content.add(
       Positioned.fill(
@@ -89,35 +89,32 @@ class SolutionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(5),
-      width: 80,
-      decoration: const BoxDecoration(
-          //color: Colors.black26,
-          //border: Border.all(width: 3, color: Colors.black45)),
-          //borderRadius: BorderRadius.all(Radius.circular(8)),
-          ),
-      child: Column(
-        children: [
-          Consumer<AppStore>(
-            builder: (_, app, __) => Stack(
-              //clipBehavior: Clip.none,
-              children: _getStackContent(context, app.mode),
+    return InkWell(
+      onTap: _solution.start,
+      child: Container(
+        padding: const EdgeInsets.all(5),
+        width: 80,
+        child: Column(
+          children: [
+            Consumer<AppStore>(
+              builder: (_, app, __) => Stack(
+                children: _getStackContent(context, app.mode),
+              ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 5),
-            child: Text(
-              _solution.isPinned ? ('★' + _solution.name) : _solution.name,
-              style: const TextStyle(
-                  fontSize: 12,
-                  overflow: TextOverflow.ellipsis,
-                  color: Colors.black54),
-              maxLines: 2,
-              textAlign: TextAlign.center,
+            Container(
+              padding: const EdgeInsets.only(top: 5),
+              child: Text(
+                _solution.isPinned ? ('★' + _solution.name) : _solution.name,
+                style: const TextStyle(
+                    fontSize: 12,
+                    overflow: TextOverflow.ellipsis,
+                    color: Colors.black54),
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -10,6 +10,11 @@ class Solution {
 
   SolutionType get type => getSolutionTypeById(typeId);
 
+  void start() {
+    // print('started' + this.id.toString());
+    type.startMethod(path);
+  }
+
   Solution(this.id, this.groupId, this.typeId, this.name, this.path) {
     isPinned = false;
   }

@@ -11,9 +11,15 @@ OS currentOs() {
 }
 
 List<SolutionType> _solutionTypes = [
-  SolutionType(1, 'Visual Studio', Image.asset('assets/vs.png'), [OS.win]),
   SolutionType(
-      2, 'VS Code', Image.asset('assets/vs-code.png'), [OS.win, OS.mac])
+      1, 'Visual Studio', Image.asset('assets/vs.png'), [OS.win], (path) {}),
+  SolutionType(
+      2, 'VS Code', Image.asset('assets/vs-code.png'), [OS.win, OS.mac],
+      (path) async {
+    // print("opening vscode " + path);
+    // var p = Process.start("/usr/local/bin/code", ["-n", path]);
+    //Process.run('open', ['~/test.txt']);
+  })
 ];
 
 List<SolutionType> getAvailableSolutionTypes() {
@@ -31,6 +37,7 @@ class SolutionType {
   String name;
   Widget icon;
   List<OS> platforms;
+  Function(String path) startMethod;
 
-  SolutionType(this.id, this.name, this.icon, this.platforms);
+  SolutionType(this.id, this.name, this.icon, this.platforms, this.startMethod);
 }

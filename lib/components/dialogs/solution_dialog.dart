@@ -65,7 +65,6 @@ Future<void> showSolutionDialog(BuildContext context,
                 padding: const EdgeInsets.only(top: 10),
                 child: const Text(
                   "Solution type",
-                  // textAlign: TextAlign.left,
                   style: TextStyle(fontSize: 12),
                 ),
               ),
@@ -84,15 +83,14 @@ Future<void> showSolutionDialog(BuildContext context,
                 padding: const EdgeInsets.only(top: 10),
                 child: const Text(
                   "Path to solution or folder",
-                  // textAlign: TextAlign.left,
                   style: TextStyle(fontSize: 12),
                 ),
               ),
               TextField(
                 autofocus: true,
-                //maxLength: maxLength,
                 onChanged: (value) {
                   solPath = value;
+                  //if (solName == "") solName = _calcName(value);
                 },
                 controller: _solPathController,
                 decoration: const InputDecoration(
@@ -144,7 +142,6 @@ Future<void> showSolutionDialog(BuildContext context,
                 }
 
                 if (reqs.isNotEmpty) {
-                  //showDialog(context: context, builder: builder)
                   var alert = "Following fields are required and not filled: " +
                       reqs.join(", ") +
                       ".";
