@@ -69,9 +69,21 @@ class DataStore extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addSolution(int groupId, String name) {
-    final sol = Solution(generateId(), groupId, 1, name, 'path');
+  void addSolution(int groupId, int typeId, String path, String name) {
+    final sol = Solution(generateId(), groupId, typeId, name, path);
     _solutions.add(sol);
+
+    notifyListeners();
+  }
+
+  void editSolution(
+      Solution solution, int groupId, int typeId, String path, String name) {
+    _solutions.remove(solution);
+    solution.typeId = typeId;
+    solution.groupId = groupId;
+    solution.path = path;
+    solution.name = name;
+    _solutions.add(solution);
 
     notifyListeners();
   }

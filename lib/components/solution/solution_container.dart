@@ -4,6 +4,7 @@ import 'package:rocket/components/dialogs/solution_dialog.dart';
 import 'package:rocket/components/solution/solution_item.dart';
 import 'package:rocket/models/solution_model.dart';
 import 'package:rocket/stores/data_store.dart';
+import 'package:rocket/stores/exposed.dart';
 
 class SolutionContainer extends StatelessWidget {
   const SolutionContainer(this.groupId, {Key? key}) : super(key: key);
@@ -21,7 +22,9 @@ class SolutionContainer extends StatelessWidget {
         child: IconButton(
             onPressed: () {
               //data.addSolution(groupId, 'NewSolutionMoreText.sln');
-              showSolutionDialog(context, onSave: (_) {});
+              showSolutionDialog(context, onSave: (_, typeId, path, name) {
+                dataStore!.addSolution(groupId, typeId, path, name);
+              });
             },
             icon: const Icon(Icons.add)));
   }

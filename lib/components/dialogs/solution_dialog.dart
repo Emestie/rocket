@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:rocket/components/dialogs/alert_dialog.dart';
+import 'package:rocket/components/solution/dropdown.dart';
 import 'package:rocket/models/solution_model.dart';
 import 'package:rocket/models/solution_type_model.dart';
 import 'package:rocket/stores/exposed.dart';
 
 Future<void> showSolutionDialog(BuildContext context,
-    {required Function(String text) onSave, Solution? solution}) async {
+    {required Function(int groupId, int type, String path, String name) onSave,
+    Solution? solution}) async {
+  final solutionTypes = getAvailableSolutionTypes();
+  final groups = dataStore!.groups;
+
   var solPath = solution?.path ?? "";
   var solName = solution?.name ?? "";
+  var groupId = solution?.groupId ?? 0;
+  var typeId = solution?.typeId;
+  if (!solutionTypes.map((e) => e.id).toList().contains(typeId)) {
+    typeId = null;
+  }
 
   TextEditingController _solPathController =
       TextEditingController(text: solPath);
 
   TextEditingController _solNameController =
       TextEditingController(text: solName);
-
-  final solutionTypes = getAvailableSolutionTypes();
-  final groups = dataStore?.groups;
 
   List<Widget> _getGroupPicker() {
     if (solution == null) return [];
@@ -28,14 +36,17 @@ Future<void> showSolutionDialog(BuildContext context,
           style: TextStyle(fontSize: 12),
         ),
       ),
-      DropdownButton(
+      Dropdown<int?>(
+          value: groupId,
           items: groups
-              ?.map((e) => DropdownMenuItem(
+              .map((e) => DropdownMenuItem(
                     child: Text(e.name),
                     value: e.id,
                   ))
               .toList(),
-          onChanged: (_) {}),
+          onChanged: (int? value) {
+            groupId = value ?? 0;
+          }),
     ];
   }
 
@@ -58,14 +69,17 @@ Future<void> showSolutionDialog(BuildContext context,
                   style: TextStyle(fontSize: 12),
                 ),
               ),
-              DropdownButton(
+              Dropdown<int?>(
                   items: solutionTypes
                       .map((e) => DropdownMenuItem(
                             child: Row(children: [e.icon, Text("  " + e.name)]),
                             value: e.id,
                           ))
                       .toList(),
-                  onChanged: (_) {}),
+                  value: typeId,
+                  onChanged: (int? value) {
+                    typeId = value ?? 0;
+                  }),
               Container(
                 padding: const EdgeInsets.only(top: 10),
                 child: const Text(
@@ -88,7 +102,6 @@ Future<void> showSolutionDialog(BuildContext context,
                 padding: const EdgeInsets.only(top: 10),
                 child: const Text(
                   "Solution name",
-                  // textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 12,
                   ),
@@ -114,9 +127,32 @@ Future<void> showSolutionDialog(BuildContext context,
               },
             ),
             TextButton(
-              child: Text("Save"),
+              child: const Text("Save"),
               onPressed: () {
-                onSave("");
+                var reqs = [];
+
+                if (typeId == 0 || typeId == null) {
+                  reqs.add("Solution type");
+                }
+
+                if (solPath == "") {
+                  reqs.add("Path");
+                }
+
+                if (solName == "") {
+                  reqs.add("Name");
+                }
+
+                if (reqs.isNotEmpty) {
+                  //showDialog(context: context, builder: builder)
+                  var alert = "Following fields are required and not filled: " +
+                      reqs.join(", ") +
+                      ".";
+                  showAlertDialog(context, title: "Oops", text: alert);
+                  return;
+                }
+
+                onSave(groupId, typeId ?? 0, solPath, solName);
                 Navigator.pop(context);
               },
             ),

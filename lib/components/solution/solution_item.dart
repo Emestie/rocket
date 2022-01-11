@@ -54,7 +54,10 @@ class SolutionItem extends StatelessWidget {
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
             onPressed: () {
-              showSolutionDialog(context, onSave: (_) {}, solution: _solution);
+              showSolutionDialog(context,
+                  onSave: (groupId, typeId, path, name) {
+                dataStore!.editSolution(_solution, groupId, typeId, path, name);
+              }, solution: _solution);
             },
             icon: const Icon(Icons.edit_outlined),
             iconSize: 14,
