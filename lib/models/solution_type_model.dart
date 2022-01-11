@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:rocket/code/helpers.dart';
+import 'package:rocket/code/starters.dart';
 
 enum OS { unknown, win, mac }
 
@@ -13,14 +13,9 @@ OS currentOs() {
 
 List<SolutionType> _solutionTypes = [
   SolutionType(
-      1, 'Visual Studio', Image.asset('assets/vs.png'), [OS.win], (path) {}),
-  SolutionType(
-      2, 'VS Code', Image.asset('assets/vs-code.png'), [OS.win, OS.mac],
-      (path) async {
-    var home = getHomePath();
-
-    Process.run('code', ['-n', path.replaceFirst('~', home)]);
-  })
+      1, 'Visual Studio', Image.asset('assets/vs.png'), [OS.win], startVS),
+  SolutionType(2, 'VS Code', Image.asset('assets/vs-code.png'),
+      [OS.win, OS.mac], startVSCode)
 ];
 
 List<SolutionType> getAvailableSolutionTypes() {

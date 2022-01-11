@@ -13,3 +13,9 @@ String getHomePath() {
   }
   return home ?? "";
 }
+
+String preparePath(String path) {
+  var home = getHomePath();
+
+  return path.replaceFirst('~', home);
+}
