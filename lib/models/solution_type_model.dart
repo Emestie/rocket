@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:rocket/code/helpers.dart';
 
 enum OS { unknown, win, mac }
 
@@ -16,9 +17,9 @@ List<SolutionType> _solutionTypes = [
   SolutionType(
       2, 'VS Code', Image.asset('assets/vs-code.png'), [OS.win, OS.mac],
       (path) async {
-    // print("opening vscode " + path);
-    // var p = Process.start("/usr/local/bin/code", ["-n", path]);
-    //Process.run('open', ['~/test.txt']);
+    var home = getHomePath();
+
+    Process.run('code', ['-n', path.replaceFirst('~', home)]);
   })
 ];
 
