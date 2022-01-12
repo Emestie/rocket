@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:rocket/code/starters.dart';
+import 'package:rocket/code/validators.dart';
 
 enum OS { unknown, win, mac }
 
@@ -12,10 +13,10 @@ OS currentOs() {
 }
 
 List<SolutionType> _solutionTypes = [
-  SolutionType(
-      1, 'Visual Studio', Image.asset('assets/vs.png'), [OS.win], startVS),
+  SolutionType(1, 'Visual Studio', Image.asset('assets/vs.png'), [OS.win],
+      startVS, validateVS),
   SolutionType(2, 'VS Code', Image.asset('assets/vs-code.png'),
-      [OS.win, OS.mac], startVSCode)
+      [OS.win, OS.mac], startVSCode, emptyValidator)
 ];
 
 List<SolutionType> getAvailableSolutionTypes() {
@@ -34,6 +35,8 @@ class SolutionType {
   Widget icon;
   List<OS> platforms;
   Function(String path) startMethod;
+  Function(String path, String name) validate;
 
-  SolutionType(this.id, this.name, this.icon, this.platforms, this.startMethod);
+  SolutionType(this.id, this.name, this.icon, this.platforms, this.startMethod,
+      this.validate);
 }

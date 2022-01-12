@@ -149,6 +149,16 @@ Future<void> showSolutionDialog(BuildContext context,
                   return;
                 }
 
+                var solutionType = getSolutionTypeById(typeId ?? 0);
+
+                var validationErrorText =
+                    solutionType.validate(solPath, solName);
+                if (validationErrorText != null) {
+                  showAlertDialog(context,
+                      title: "Oops", text: validationErrorText);
+                  return;
+                }
+
                 onSave(groupId, typeId ?? 0, solPath, solName);
                 Navigator.pop(context);
               },

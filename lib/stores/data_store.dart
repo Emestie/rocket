@@ -114,7 +114,7 @@ class DataStore extends ChangeNotifier {
 
     final jsonString = jsonEncode(
         {'groups': _groups, 'solutions': _solutions, "lastId": lastId});
-    print(jsonString);
+    //print(jsonString);
 
     sharedPreferences?.setString('Data', jsonString);
   }
