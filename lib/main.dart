@@ -1,3 +1,4 @@
+import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rocket/stores/exposed.dart';
@@ -7,6 +8,11 @@ import './views/main_view.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initStoresAndPreferences();
+
+  await DesktopWindow.setWindowSize(const Size(800, 600));
+
+  await DesktopWindow.setMinWindowSize(const Size(640, 480));
+  await DesktopWindow.setMaxWindowSize(const Size(960, 640));
 
   runApp(MultiProvider(
     providers: [
