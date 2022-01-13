@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rocket/code/updater.dart';
 import 'package:rocket/stores/exposed.dart';
 
 import './views/main_view.dart';
@@ -26,6 +27,8 @@ Future<void> main() async {
     ],
     child: const App(),
   ));
+
+  startUpdateChecker();
 }
 
 class App extends StatelessWidget {

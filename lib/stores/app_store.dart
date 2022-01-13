@@ -3,6 +3,7 @@ import 'package:rocket/enums.dart';
 
 class AppStore extends ChangeNotifier {
   AppMode _mode = AppMode.view;
+  bool hasUpdate = false;
   get mode => _mode;
 
   void setAppMode(AppMode mode) {
@@ -12,6 +13,11 @@ class AppStore extends ChangeNotifier {
 
   void toggleAppMode() {
     _mode = _mode == AppMode.view ? AppMode.edit : AppMode.view;
+    notifyListeners();
+  }
+
+  void setHasUpdate(bool hasUpdate) {
+    this.hasUpdate = hasUpdate;
     notifyListeners();
   }
 }
