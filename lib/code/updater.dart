@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/services.dart' show SystemNavigator, rootBundle;
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import 'package:rocket/stores/exposed.dart';
 import 'package:url_launcher/url_launcher.dart';
