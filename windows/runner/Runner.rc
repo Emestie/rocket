@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "mst.rocket" "\0"
+            VALUE "CompanyName", "Valery Murashko" "\0"
             VALUE "FileDescription", "Rocket - Solution launcher." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "rocket" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 mst. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 Valery Murashko. All rights reserved." "\0"
             VALUE "OriginalFilename", "rocket.exe" "\0"
             VALUE "ProductName", "Rocket" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
