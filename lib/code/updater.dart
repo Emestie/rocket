@@ -54,14 +54,13 @@ String _convertSemverToZeroedString(String semver) {
 void startUpdateChecker() {
   void checkUpdate() async {
     bool hasUpdate = await checkUpdateAvailability();
-    print('checking ' + hasUpdate.toString());
     if (!hasUpdate) return;
     appStore?.setHasUpdate(true);
   }
 
   checkUpdate();
 
-  Timer.periodic(const Duration(seconds: 10), (timer) {
+  Timer.periodic(const Duration(hours: 3), (timer) {
     checkUpdate();
   });
 }
