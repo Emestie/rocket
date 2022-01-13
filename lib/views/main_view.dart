@@ -7,6 +7,7 @@ import 'package:rocket/components/dialogs/alert_dialog.dart';
 import 'package:rocket/components/group/group_container.dart';
 import 'package:rocket/enums.dart';
 import 'package:rocket/stores/app_store.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainView extends StatefulWidget {
   const MainView(this.appTitle, {Key? key}) : super(key: key);
@@ -56,6 +57,14 @@ class _MainViewState extends State<MainView> {
               child: const Text("INSTALL UPDATE"),
             );
           }),
+          TextButton(
+            style: TextButton.styleFrom(primary: Colors.white),
+            onPressed: () async {
+              await launch(
+                  "mailto:emestie+rocket@gmail.com?subject=Rocket_feedback");
+            },
+            child: const Text("Feedback"),
+          ),
           Consumer<AppStore>(
             builder: (_, app, __) => IconButton(
                 onPressed: app.toggleAppMode,
