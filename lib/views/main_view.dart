@@ -20,7 +20,7 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   void showPackageInfo() async {
     var ver = await loadAppVersion();
-    var platform = Platform.isWindows ? "win" : "mac";
+    var platform = Platform.isWindows ? "Windows" : "macOS";
 
     showAlertDialog(context,
         title: "About", text: "Version: " + ver + " ($platform)");
