@@ -29,7 +29,7 @@ List<SolutionType> _solutionTypes = [
       starter: startVSCode,
       validate: emptyValidator,
       commandExampleText:
-          "/path/to/any/folder/to/open\nOR\nC:\\path\\to\\any\\folder\\to\\open"),
+          "/path/to/any/folder/to/open\nOR\nC:\\path\\to\\any\\folder\\to\\open\nOR\nvscode-remote://ssh-remote+192.168.5.100/path/to/remote"),
   SolutionType(
       id: 3,
       name: 'Finder',
