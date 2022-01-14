@@ -26,28 +26,15 @@ void startExplorer(String path) {
 }
 
 //PowerShell for Windows
+void startPowershell(String path) {
+  Process.start("powershell.exe", ['-noexit', '-command', preparePath(path)],
+      runInShell: true, mode: ProcessStartMode.detached);
+}
 
 //PowerShell Core
 void startPowershellCore(String path) {
-  var executable = Platform.isWindows ? "pwsh.exe" : "/usr/local/bin/pwsh";
-
-  Process.start(
-      executable, ['-noexit', '-command', '"' + preparePath(path) + '"'],
+  Process.start("pwsh.exe", ['-noexit', '-command', preparePath(path)],
       runInShell: true, mode: ProcessStartMode.detached);
-  // Process.start(
-  //         'open',
-  //         [
-  //           '-a',
-  //           'PowerShell',
-  //           '--args',
-  //           '-noexit',
-  //           '-command',
-  //           preparePath(path)
-  //         ],
-  //         workingDirectory: "/",
-  //         mode: ProcessStartMode.detached,
-  //         runInShell: true)
-  //     .then((value) => value.stdin.write("cd / && ls"));
 }
 
 //Mac Terminal

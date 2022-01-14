@@ -42,6 +42,13 @@ List<SolutionType> _solutionTypes = [
       starter: startExplorer,
       validate: emptyValidator),
   SolutionType(
+      id: 5,
+      name: "Windows PowerShell",
+      icon: Image.asset('assets/ps.png'),
+      platforms: [OS.win],
+      starter: startPowershell,
+      validate: emptyValidator),
+  SolutionType(
       id: 6,
       name: "PowerShell Core",
       icon: Image.asset('assets/ps-core.png'),
