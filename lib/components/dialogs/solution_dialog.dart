@@ -79,6 +79,27 @@ Future<void> showSolutionDialog(BuildContext context,
                   onChanged: (int? value) {
                     typeId = value ?? 0;
                   }),
+              TextButton(
+                  onPressed: () {
+                    if (typeId == 0 || typeId == null) {
+                      showAlertDialog(context,
+                          title: "Oops",
+                          text: "You have to select Solution type first");
+                      return;
+                    }
+
+                    final solutionType = getSolutionTypeById(typeId ?? 0);
+                    showAlertDialog(context,
+                        title: "Command or path example",
+                        text: solutionType.commandExampleText);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.info_outline),
+                      Text("  Show path/command example")
+                    ],
+                  )),
               Container(
                 padding: const EdgeInsets.only(top: 10),
                 child: const Text(

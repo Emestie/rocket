@@ -19,49 +19,57 @@ List<SolutionType> _solutionTypes = [
       icon: Image.asset('assets/vs.png'),
       platforms: [OS.win],
       starter: startVS,
-      validate: validateVS),
+      validate: validateVS,
+      commandExampleText: "C:\\path\\to\\solution.sln"),
   SolutionType(
       id: 2,
       name: 'VS Code',
       icon: Image.asset('assets/vs-code.png'),
       platforms: [OS.win, OS.mac],
       starter: startVSCode,
-      validate: emptyValidator),
+      validate: emptyValidator,
+      commandExampleText:
+          "/path/to/any/folder/to/open\nOR\nC:\\path\\to\\any\\folder\\to\\open"),
   SolutionType(
       id: 3,
       name: 'Finder',
       icon: Image.asset('assets/finder.png'),
       platforms: [OS.mac],
       starter: startFinder,
-      validate: emptyValidator),
+      validate: emptyValidator,
+      commandExampleText: "/path/to/folder"),
   SolutionType(
       id: 4,
       name: "Explorer",
       icon: Image.asset('assets/explorer.png'),
       platforms: [OS.win],
       starter: startExplorer,
-      validate: emptyValidator),
+      validate: emptyValidator,
+      commandExampleText: "C:\\path\\to\\folder"),
   SolutionType(
       id: 5,
       name: "Windows PowerShell",
       icon: Image.asset('assets/ps.png'),
       platforms: [OS.win],
       starter: startPowershell,
-      validate: emptyValidator),
+      validate: emptyValidator,
+      commandExampleText: "cd C:\\any\\path ; anotherCommand.cmd"),
   SolutionType(
       id: 6,
       name: "PowerShell Core",
       icon: Image.asset('assets/ps-core.png'),
       platforms: [OS.win],
       starter: startPowershellCore,
-      validate: emptyValidator),
+      validate: emptyValidator,
+      commandExampleText: "cd C:\\any\\path && anotherCommand.cmd"),
   SolutionType(
       id: 7,
       name: "Terminal",
       icon: Image.asset('assets/terminal.png'),
       platforms: [OS.mac],
       starter: startTerminal,
-      validate: emptyValidator),
+      validate: emptyValidator,
+      commandExampleText: "cd /any/path && ls && anyCommandAnyFile"),
 ];
 
 List<SolutionType> getAvailableSolutionTypes() {
@@ -81,6 +89,7 @@ class SolutionType {
   List<OS> platforms;
   Function(String path) starter;
   Function(String path, String name) validate;
+  String commandExampleText;
 
   SolutionType(
       {required this.id,
@@ -88,5 +97,6 @@ class SolutionType {
       required this.icon,
       required this.platforms,
       required this.starter,
-      required this.validate});
+      required this.validate,
+      required this.commandExampleText});
 }
