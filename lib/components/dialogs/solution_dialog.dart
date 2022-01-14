@@ -82,7 +82,7 @@ Future<void> showSolutionDialog(BuildContext context,
               Container(
                 padding: const EdgeInsets.only(top: 10),
                 child: const Text(
-                  "Path to solution or folder",
+                  "Path to solution/folder or terminal command",
                   style: TextStyle(fontSize: 12),
                 ),
               ),
@@ -94,7 +94,8 @@ Future<void> showSolutionDialog(BuildContext context,
                 },
                 controller: _solPathController,
                 decoration: const InputDecoration(
-                    hintText: "Full path to solution or folder"),
+                    hintText:
+                        "Full path to solution/folder or terminal command"),
               ),
               Container(
                 padding: const EdgeInsets.only(top: 10),
@@ -134,7 +135,7 @@ Future<void> showSolutionDialog(BuildContext context,
                 }
 
                 if (solPath == "") {
-                  reqs.add("Path");
+                  reqs.add("Path/Command");
                 }
 
                 if (solName == "") {

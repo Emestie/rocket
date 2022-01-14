@@ -17,8 +17,8 @@ class SolutionItem extends StatelessWidget {
 
     content.add(
       Positioned.fill(
-        left: 34,
-        top: 34,
+        left: 30,
+        top: 30,
         child: _solution.type.icon,
       ),
     );

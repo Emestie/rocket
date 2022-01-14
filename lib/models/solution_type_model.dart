@@ -13,10 +13,48 @@ OS currentOs() {
 }
 
 List<SolutionType> _solutionTypes = [
-  SolutionType(1, 'Visual Studio', Image.asset('assets/vs.png'), [OS.win],
-      startVS, validateVS),
-  SolutionType(2, 'VS Code', Image.asset('assets/vs-code.png'),
-      [OS.win, OS.mac], startVSCode, emptyValidator)
+  SolutionType(
+      id: 1,
+      name: 'Visual Studio',
+      icon: Image.asset('assets/vs.png'),
+      platforms: [OS.win],
+      starter: startVS,
+      validate: validateVS),
+  SolutionType(
+      id: 2,
+      name: 'VS Code',
+      icon: Image.asset('assets/vs-code.png'),
+      platforms: [OS.win, OS.mac],
+      starter: startVSCode,
+      validate: emptyValidator),
+  SolutionType(
+      id: 3,
+      name: 'Finder',
+      icon: Image.asset('assets/finder.png'),
+      platforms: [OS.mac],
+      starter: startFinder,
+      validate: emptyValidator),
+  SolutionType(
+      id: 4,
+      name: "Explorer",
+      icon: Image.asset('assets/explorer.png'),
+      platforms: [OS.win],
+      starter: startExplorer,
+      validate: emptyValidator),
+  SolutionType(
+      id: 6,
+      name: "PowerShell Core",
+      icon: Image.asset('assets/ps-core.png'),
+      platforms: [OS.win],
+      starter: startPowershellCore,
+      validate: emptyValidator),
+  SolutionType(
+      id: 7,
+      name: "Terminal",
+      icon: Image.asset('assets/terminal.png'),
+      platforms: [OS.mac],
+      starter: startTerminal,
+      validate: emptyValidator),
 ];
 
 List<SolutionType> getAvailableSolutionTypes() {
@@ -34,9 +72,14 @@ class SolutionType {
   String name;
   Widget icon;
   List<OS> platforms;
-  Function(String path) startMethod;
+  Function(String path) starter;
   Function(String path, String name) validate;
 
-  SolutionType(this.id, this.name, this.icon, this.platforms, this.startMethod,
-      this.validate);
+  SolutionType(
+      {required this.id,
+      required this.name,
+      required this.icon,
+      required this.platforms,
+      required this.starter,
+      required this.validate});
 }

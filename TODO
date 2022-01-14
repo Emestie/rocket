@@ -1,0 +1,6 @@
+code --folder-uri vscode-remote://ssh-remote+192.168.5.152/dev1/eos-webui-formgen
+powershell.exe -noexit -command "cd 'c:\temp'"
+
+добавить Release Notes в окно About
+
+add info about all types of sols

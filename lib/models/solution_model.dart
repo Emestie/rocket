@@ -12,7 +12,7 @@ class Solution {
 
   void start() {
     // print('started' + this.id.toString());
-    type.startMethod(path);
+    type.starter(path);
   }
 
   Solution(this.id, this.groupId, this.typeId, this.name, this.path) {
