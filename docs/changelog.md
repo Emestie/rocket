@@ -2,6 +2,9 @@
 
 _release notes are not available in English_
 
+## 0.1.3
+- новая иконка приложения в macOS
+
 ## 0.1.2
 
 -   поддержка vscode-remote:// ссылок для VS Code для открытия удаленного проекта (например по SSH)
